@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEMILIHAN REMAJA TELADAN GMIM - WILAYAH MANADO UTARA IV</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            50: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                            950: '#2e1065',
+                        },
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .bg-purple-gradient {
+            background: linear-gradient(135deg, #2e1065 0%, #5b21b6 50%, #7c3aed 100%);
+        }
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #facc15 0%, #eab308 50%, #ca8a04 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Top Navigation Bar -->
+        <header id="main-header" class="bg-brand-900 text-white shadow-lg sticky top-0 z-40 border-b-2 border-gold-400">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div id="header-logo-container" class="w-12 h-12 rounded-full bg-white/10 p-1 flex items-center justify-center border border-gold-400/40">
+                        <img id="app-logo-img" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=120&auto=format&fit=crop&q=80" alt="Logo" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h1 id="app-title-display" class="font-bold text-base sm:text-lg leading-tight text-gold-300 tracking-wide uppercase">PEMILIHAN REMAJA TELADAN GMIM</h1>
+                        <p id="app-subtitle-display" class="text-xs sm:text-sm text-purple-200 font-medium">WILAYAH MANADO UTARA IV</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <div id="user-badge" class="hidden sm:flex items-center space-x-2 bg-brand-800/80 px-3 py-1.5 rounded-lg border border-brand-700 text-xs">
+                        <i class="fa-solid fa-user-circle text-gold-400 text-sm"></i>
+                        <span id="user-display-name" class="font-medium text-purple-100">Guest</span>
+                    </div>
+                    <div id="header-nav-btns" class="flex items-center space-x-2">
+                        <!-- Navigation buttons injected dynamically -->
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Main Content Area -->
+        <main id="main-content" class="flex-grow">
+            <!-- Dynamic views rendered here via JS -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-brand-950 text-purple-200 border-t border-brand-800 py-6 text-center text-xs no-print">
+            <div class="max-w-7xl mx-auto px-4">
+                <p class="font-semibold text-gold-400" id="footer-title">Panitia Pemilihan Remaja Teladan GMIM Wilayah Manado Utara IV</p>
+                <p class="mt-1 text-purple-300">Sistem Ujian Online Resmi &copy; 2026. All Rights Reserved.</p>
+                <p class="mt-2 text-[10px] text-purple-400">"Mengasihi, Melayani, Menjadi Teladan Dalam Kristus"</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Global Application Database & State Storage
+        const APP_STATE_KEY = 'RETEL_GMIM_MNU4_APP_DATA_V1';
+
+        // Default Master Data
+        const defaultData = {
+            settings: {
+                title: "PEMILIHAN REMAJA TELADAN GMIM",
+                subtitle: "WILAYAH MANADO UTARA IV",
+                logoUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?w=120&auto=format&fit=crop&q=80",
+                durationMinutes: 60,
+                totalQuestionsConfig: 50,
+                scoreCorrect: 2,
+                scoreWrong: -1,
+                scoreEmpty: 0,
+                examStatus: 'active', // 'active', 'closed', 'draft'
+                showResultsToParticipants: true,
+                allowRetake: false,
+                welcomeMsg: "Selamat datang peserta Pemilihan Remaja Teladan GMIM Wilayah Manado Utara IV. Persiapkan diri Anda dengan berdoa sebelum memulai ujian.",
+                closingMsg: "Terima kasih telah mengikuti Pemilihan Remaja Teladan GMIM Wilayah Manado Utara IV. Tuhan Yesus Memberkati."
+            },
+            admin: {
+                username: "retelmanadoutara4",
+                passwordHash: "retelmadu4", // Simplified demo auth validation
+                name: "Administrator Wilayah"
+            },
+            jemaatList: [
+                { id: "J01", name: "GMIM Baitani Lapangan" },
+                { id: "J02", name: "GMIM Nazareth Tuminting" },
+                { id: "J03", name: "GMIM Petra Buha" },
+                { id: "J04", name: "GMIM Siloam Sumompo" },
+                { id: "J05", name: "GMIM Yordan Bunaken" },
+                { id: "J06", name: "GMIM Sion Bailang" }
+            ],
+            participants: [
+                { id: "P001", username: "p_renaldi", password: "123", name: "Renaldi Sumual", jemaat: "GMIM Baitani Lapangan", active: true },
+                { id: "P002", username: "p_kezia", password: "123", name: "Kezia Rumagit", jemaat: "GMIM Nazareth Tuminting", active: true },
+                { id: "P003", username: "p_mario", password: "123", name: "Mario Lontoh", jemaat: "GMIM Petra Buha", active: true }
+            ],
+            // 50 Questions Default Questions Generator
+            questions: Array.from({ length: 50 }, (_, i) => {
+                const qNum = i + 1;
+                const topics = [
+                    {
+                        cat: "Alkitab & Teologi",
+                        q: `Berapakah jumlah kitab dalam Alkitab Perjanjian Lama dan Perjanjian Baru? (Soal #${qNum})`,
+                        a: "39 PL dan 27 PB (Total 66)", b: "38 PL dan 27 PB (Total 65)", c: "40 PL dan 26 PB (Total 66)", d: "39 PL dan 28 PB (Total 67)",
+                        ans: "A"
+                    },
+                    {
+                        cat: "Tata Gereja GMIM",
+                        q: `Siapakah Kepala Gereja menurut ajaran dan Pemahaman Iman GMIM? (Soal #${qNum})`,
+                        a: "Ketua BPMS", b: "Tuhan Yesus Kristus", c: "Penduduk Jemaat", d: "Majelis Wilayah",
+                        ans: "B"
+                    },
+                    {
+                        cat: "Pengetahuan Umum & Pemuda/Remaja",
+                        q: `Apa warna panji resmi Pelayanan Kategorial Remaja GMIM? (Soal #${qNum})`,
+                        a: "Merah", b: "Biru Tua", c: "Ungu", d: "Hijau",
+                        ans: "C"
+                    },
+                    {
+                        cat: "Sejarah Gereja & Misi",
+                        q: `Di manakah tempat pelaksanaan Sidang Synode GMIM pertama kali pada tahun 1934? (Soal #${qNum})`,
+                        a: "Manado", b: "Tomohon", c: "Tondano", d: "Bitung",
+                        ans: "B"
+                    }
+                ];
+                const selected = topics[i % topics.length];
+                return {
+                    id: qNum,
+                    category: selected.cat,
+                    question: selected.q,
+                    options: { A: selected.a, B: selected.b, C: selected.c, D: selected.d },
+                    correctAnswer: selected.ans
+                };
+            }),
+            results: [] // Holds { participantId, name, username, jemaat, correct, wrong, empty, finalScore, startTime, endTime, status }
+        };
+
+        // Current Session Data
+        let store = loadData();
+        let currentAuth = null; // { type: 'admin'|'participant', data: userObj }
+        let currentExamState = {
+            active: false,
+            answers: {}, // { questionId: 'A'|'B'|'C'|'D' }
+            timeRemaining: 0,
+            timerInterval: null,
+            startTime: null
+        };
+
+        function loadData() {
+            try {
+                const saved = localStorage.getItem(APP_STATE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    // Ensure 50 questions exist if data was mutated
+                    if (!parsed.questions || parsed.questions.length < 50) {
+                        parsed.questions = defaultData.questions;
+                    }
+                    return parsed;
+                }
+            } catch (e) {
+                console.error("Failed to load local storage", e);
+            }
+            return defaultData;
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(APP_STATE_KEY, JSON.stringify(store));
+                updateHeaderUI();
+            } catch (e) {
+                console.error("Failed to save data", e);
+            }
+        }
+
+        function navigateTo(page, params = {}) {
+            const mainContent = document.getElementById('main-content');
+            
+            // Authorization Guard
+            if (page === 'exam' || page === 'participant-result') {
+                if (!currentAuth || currentAuth.type !== 'participant') {
+                    renderParticipantLogin("Silakan login terlebih dahulu untuk mengakses ujian.");
+                    return;
+                }
+            }
+            if (page.startsWith('admin-') && page !== 'admin-login') {
+                if (!currentAuth || currentAuth.type !== 'admin') {
+                    renderAdminLogin("Silakan login sebagai admin terlebih dahulu.");
+                    return;
+                }
+            }
+
+            updateHeaderUI();
+
+            switch (page) {
+                case 'home':
+                case 'participant-login':
+                    renderParticipantLogin();
+                    break;
+                case 'admin-login':
+                    renderAdminLogin();
+                    break;
+                case 'exam':
+                    renderExamPage();
+                    break;
+                case 'participant-result':
+                    renderParticipantResultPage(params.resultObj);
+                    break;
+                case 'admin-dashboard':
+                    renderAdminDashboard('overview');
+                    break;
+                case 'admin-participants':
+                    renderAdminDashboard('participants');
+                    break;
+                case 'admin-jemaat':
+                    renderAdminDashboard('jemaat');
+                    break;
+                case 'admin-questions':
+                    renderAdminDashboard('questions');
+                    break;
+                case 'admin-results':
+                    renderAdminDashboard('results');
+                    break;
+                case 'admin-settings':
+                    renderAdminDashboard('settings');
+                    break;
+                default:
+                    renderParticipantLogin();
+            }
+            lucide.createIcons();
+        }
+
+        function updateHeaderUI() {
+            const titleEl = document.getElementById('app-title-display');
+            const subTitleEl = document.getElementById('app-subtitle-display');
+            const logoImg = document.getElementById('app-logo-img');
+            const navBtns = document.getElementById('header-nav-btns');
+            const userBadge = document.getElementById('user-badge');
+            const userDisplayName = document.getElementById('user-display-name');
+
+            titleEl.textContent = store.settings.title;
+            subTitleEl.textContent = store.settings.subtitle;
+            if (store.settings.logoUrl) {
+                logoImg.src = store.settings.logoUrl;
+            }
+
+            if (currentAuth) {
+                userBadge.classList.remove('hidden');
+                userDisplayName.textContent = currentAuth.data.name || currentAuth.data.username;
+
+                if (currentAuth.type === 'admin') {
+                    navBtns.innerHTML = `
+                        <button onclick="navigateTo('admin-dashboard')" class="bg-brand-700 hover:bg-brand-600 text-white text-xs px-3 py-1.5 rounded font-medium flex items-center space-x-1 transition">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <span class="hidden md:inline">Dashboard Admin</span>
+                        </button>
+                        <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded font-medium flex items-center space-x-1 transition">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Keluar</span>
+                        </button>
+                    `;
+                } else {
+                    navBtns.innerHTML = `
+                        <button onclick="logout()" class="bg-red-600/80 hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded font-medium flex items-center space-x-1 transition">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Keluar</span>
+                        </button>
+                    `;
+                }
+            } else {
+                userBadge.classList.add('hidden');
+                navBtns.innerHTML = `
+                    <button onclick="navigateTo('participant-login')" class="bg-gold-500 hover:bg-gold-600 text-brand-950 font-bold text-xs px-3 py-1.5 rounded transition shadow-sm">
+                        Login Peserta
+                    </button>
+                    <button onclick="navigateTo('admin-login')" class="bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded border border-purple-300/30 transition">
+                        Portal Admin
+                    </button>
+                `;
+            }
+        }
+
+        function logout() {
+            if (currentExamState.active) {
+                if (!confirm("Ujian sedang berlangsung! Apakah Anda yakin ingin keluar? Jawaban akan disimpan dan dikirim.")) {
+                    return;
+                }
+                finishExam(true);
+            }
+            currentAuth = null;
+            navigateTo('participant-login');
+        }
+
+        function renderParticipantLogin(errorMsg = '') {
+            const container = document.getElementById('main-content');
+            const jemaatOptions = store.jemaatList.map(j => `<option value="${j.name}">${j.name}</option>`).join('');
+
+            container.innerHTML = `
+                <div class="min-h-[calc(100vh-130px)] bg-purple-gradient py-12 px-4 flex items-center justify-center relative overflow-hidden">
+                    <!-- Subtle Background Decorative Circles -->
+                    <div class="absolute -top-12 -left-12 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-12 -right-12 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-purple-100 z-10 my-auto">
+                        <!-- Top Banner Header -->
+                        <div class="bg-brand-900 p-6 text-center text-white relative">
+                            <div class="inline-block p-2 rounded-full bg-white/10 mb-3 border-2 border-gold-400 shadow-md">
+                                <img src="${store.settings.logoUrl}" alt="Logo Kegiatan" class="w-20 h-20 object-cover rounded-full">
+                            </div>
+                            <h2 class="text-xl font-extrabold text-gold-300 leading-tight uppercase tracking-wider">${store.settings.title}</h2>
+                            <p class="text-xs text-purple-200 mt-1 font-medium">${store.settings.subtitle}</p>
+                        </div>
+
+                        <!-- Login Form -->
+                        <div class="p-6 sm:p-8 bg-white">
+                            <div class="mb-5 text-center">
+                                <h3 class="text-lg font-bold text-slate-800">Login Peserta Ujian</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Masukkan kredensial akun peserta yang telah terdaftar</p>
+                            </div>
+
+                            ${errorMsg ? `
+                                <div class="mb-4 bg-red-50 border-l-4 border-red-500 p-3 rounded text-xs text-red-700 flex items-center space-x-2">
+                                    <i class="fa-solid fa-circle-exclamation text-red-500 text-sm"></i>
+                                    <span>${errorMsg}</span>
+                                </div>
+                            ` : ''}
+
+                            <form id="form-participant-login" class="space-y-4" onsubmit="handleParticipantLogin(event)">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Username Peserta</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-user text-xs"></i>
+                                        </div>
+                                        <input type="text" id="login-username" required placeholder="Contoh: p_renaldi" class="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-lock text-xs"></i>
+                                        </div>
+                                        <input type="password" id="login-password" required placeholder="Masukkan password" class="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Asal Jemaat</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-church text-xs"></i>
+                                        </div>
+                                        <select id="login-jemaat" required class="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition appearance-none">
+                                            <option value="">-- Pilih Jemaat --</option>
+                                            ${jemaatOptions}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3 rounded-lg shadow-md transition transform active:scale-95 flex items-center justify-center space-x-2 text-sm mt-2">
+                                    <span>MASUK UJIAN</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
+                            </form>
+
+                            <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+                                <span class="text-xs text-slate-400">Panitia/Pengawas Ujian?</span>
+                                <button onclick="navigateTo('admin-login')" class="text-xs text-brand-700 font-semibold hover:underline ml-1">Masuk Portal Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleParticipantLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const jemaat = document.getElementById('login-jemaat').value;
+
+            // Find participant
+            const found = store.participants.find(p => p.username === username && p.password === password && p.jemaat === jemaat);
+
+            if (!found) {
+                renderParticipantLogin("Username, Password, atau Pilihan Jemaat tidak cocok!");
+                return;
+            }
+
+            if (!found.active) {
+                renderParticipantLogin("Akun peserta Anda dinonaktifkan oleh Admin.");
+                return;
+            }
+
+            // Check if exam status is draft or closed
+            if (store.settings.examStatus === 'draft') {
+                renderParticipantLogin("Ujian belum dibuka oleh Admin (Status: Draf).");
+                return;
+            } else if (store.settings.examStatus === 'closed') {
+                renderParticipantLogin("Ujian telah resmi ditutup oleh Admin.");
+                return;
+            }
+
+            // Check if participant already completed exam
+            const existingResult = store.results.find(r => r.participantId === found.id);
+            if (existingResult && !store.settings.allowRetake) {
+                currentAuth = { type: 'participant', data: found };
+                navigateTo('participant-result', { resultObj: existingResult });
+                return;
+            }
+
+            // Successfully Authenticated
+            currentAuth = { type: 'participant', data: found };
+            startExamSession();
+        }
+
+        function startExamSession() {
+            currentExamState = {
+                active: true,
+                answers: {},
+                timeRemaining: store.settings.durationMinutes * 60,
+                timerInterval: null,
+                startTime: new Date().toISOString(),
+                currentQuestionIndex: 0
+            };
+
+            // Start countdown interval
+            currentExamState.timerInterval = setInterval(() => {
+                if (currentExamState.timeRemaining > 0) {
+                    currentExamState.timeRemaining--;
+                    updateTimerUI();
+                } else {
+                    clearInterval(currentExamState.timerInterval);
+                    alert("Waktu ujian telah habis! Sistem akan mengirim jawaban Anda secara otomatis.");
+                    finishExam(true);
+                }
+            }, 1000);
+
+            navigateTo('exam');
+        }
+
+        function updateTimerUI() {
+            const timerDisplay = document.getElementById('exam-timer-display');
+            if (timerDisplay) {
+                const mins = Math.floor(currentExamState.timeRemaining / 60);
+                const secs = currentExamState.timeRemaining % 60;
+                timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                // Alert visual if < 5 mins
+                if (currentExamState.timeRemaining < 300) {
+                    timerDisplay.classList.add('text-red-500', 'animate-pulse');
+                } else {
+                    timerDisplay.classList.remove('text-red-500', 'animate-pulse');
+                }
+            }
+        }
+
+        function renderExamPage() {
+            const container = document.getElementById('main-content');
+            const totalQ = store.settings.totalQuestionsConfig || 50;
+            const currentQ = store.questions[currentExamState.currentQuestionIndex];
+
+            // Render Exam Nav Buttons Grid (1-50)
+            let navGridHtml = '';
+            for (let i = 0; i < totalQ; i++) {
+                const qNum = i + 1;
+                const isAnswered = currentExamState.answers[qNum] !== undefined;
+                const isCurrent = i === currentExamState.currentQuestionIndex;
+
+                let btnClass = "bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200"; // default unattempted
+                if (isAnswered) {
+                    btnClass = "bg-brand-600 text-white font-bold border-brand-700"; // Answered
+                }
+                if (isCurrent) {
+                    btnClass += " ring-2 ring-gold-400 ring-offset-2"; // Current Selected
+                }
+
+                navGridHtml += `
+                    <button onclick="goToQuestion(${i})" class="w-9 h-9 rounded-lg text-xs font-semibold flex items-center justify-center border transition ${btnClass}">
+                        ${qNum}
+                    </button>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="bg-slate-100 min-h-[calc(100vh-130px)] py-6 px-4 sm:px-6">
+                    <div class="max-w-7xl mx-auto space-y-4">
+                        
+                        <!-- Exam Header Info Bar -->
+                        <div class="bg-white rounded-xl shadow-sm p-4 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <h2 class="text-base font-bold text-slate-800 uppercase tracking-wide">${store.settings.title}</h2>
+                                <p class="text-xs text-slate-500">Peserta: <strong class="text-brand-700">${currentAuth.data.name}</strong> (${currentAuth.data.jemaat})</p>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-brand-50 border border-brand-200 px-4 py-2 rounded-lg">
+                                <div class="text-slate-500 text-xs font-semibold">SISA WAKTU:</div>
+                                <div id="exam-timer-display" class="font-mono text-xl font-extrabold text-brand-800">
+                                    00:00
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Exam Section -->
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                            
+                            <!-- Question Column -->
+                            <div class="lg:col-span-3 bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between min-h-[420px]">
+                                <div>
+                                    <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+                                        <span class="bg-brand-100 text-brand-800 text-xs font-bold px-3 py-1 rounded-full">
+                                            Soal Nomor ${currentExamState.currentQuestionIndex + 1} dari ${totalQ}
+                                        </span>
+                                        <span class="text-xs text-slate-400 font-medium">${currentQ ? currentQ.category : 'Umum'}</span>
+                                    </div>
+
+                                    <div class="text-slate-800 text-base font-medium mb-6 leading-relaxed">
+                                        ${currentQ ? currentQ.question : 'Soal tidak ditemukan.'}
+                                    </div>
+
+                                    <!-- Options List -->
+                                    <div class="space-y-3">
+                                        ${['A', 'B', 'C', 'D'].map(optKey => {
+                                            const isSelected = currentExamState.answers[currentExamState.currentQuestionIndex + 1] === optKey;
+                                            return `
+                                                <label onclick="selectAnswer(${currentExamState.currentQuestionIndex + 1}, '${optKey}')" class="flex items-center p-3.5 border rounded-xl cursor-pointer transition ${isSelected ? 'bg-brand-50 border-brand-500 ring-1 ring-brand-500' : 'bg-slate-50/50 border-slate-200 hover:bg-slate-100'}">
+                                                    <div class="w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs mr-3 ${isSelected ? 'bg-brand-700 text-white' : 'bg-slate-200 text-slate-700'}">
+                                                        ${optKey}
+                                                    </div>
+                                                    <span class="text-sm text-slate-700 font-medium">${currentQ ? currentQ.options[optKey] : ''}</span>
+                                                </label>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+
+                                <!-- Question Navigation Controls -->
+                                <div class="flex items-center justify-between pt-6 border-t border-slate-100 mt-6">
+                                    <button onclick="prevQuestion()" ${currentExamState.currentQuestionIndex === 0 ? 'disabled' : ''} class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-1">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                        <span>SEBELUMNYA</span>
+                                    </button>
+
+                                    ${currentExamState.currentQuestionIndex < totalQ - 1 ? `
+                                        <button onclick="nextQuestion()" class="px-5 py-2 bg-brand-700 hover:bg-brand-800 text-white rounded-lg text-xs font-bold flex items-center space-x-1 shadow">
+                                            <span>BERIKUTNYA</span>
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </button>
+                                    ` : `
+                                        <button onclick="confirmFinishExam()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center space-x-1 shadow">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            <span>AKHIRI UJIAN</span>
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+
+                            <!-- Navigation Grid Sidebar -->
+                            <div class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                                <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Navigasi Soal Ujian</h3>
+                                
+                                <div class="grid grid-cols-5 gap-2 max-h-[320px] overflow-y-auto custom-scrollbar p-1 mb-4">
+                                    ${navGridHtml}
+                                </div>
+
+                                <div class="space-y-1.5 pt-3 border-t border-slate-100 text-[11px] text-slate-600">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-3 h-3 rounded bg-brand-600 inline-block"></span>
+                                        <span>Sudah Dijawab</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span>
+                                        <span>Belum Dijawab</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-3 h-3 rounded bg-slate-100 border-2 border-gold-400 inline-block"></span>
+                                        <span>Soal Aktif Saat Ini</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6">
+                                    <button onclick="confirmFinishExam()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-lg text-xs transition flex items-center justify-center space-x-2 shadow">
+                                        <i class="fa-solid fa-check-double"></i>
+                                        <span>SELESAIKAN UJIAN SEKARANG</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            updateTimerUI();
+        }
+
+        function selectAnswer(qNum, optKey) {
+            currentExamState.answers[qNum] = optKey;
+            renderExamPage();
+        }
+
+        function goToQuestion(idx) {
+            currentExamState.currentQuestionIndex = idx;
+            renderExamPage();
+        }
+
+        function nextQuestion() {
+            if (currentExamState.currentQuestionIndex < store.settings.totalQuestionsConfig - 1) {
+                currentExamState.currentQuestionIndex++;
+                renderExamPage();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentExamState.currentQuestionIndex > 0) {
+                currentExamState.currentQuestionIndex--;
+                renderExamPage();
+            }
+        }
+
+        function confirmFinishExam() {
+            const answeredCount = Object.keys(currentExamState.answers).length;
+            const totalQ = store.settings.totalQuestionsConfig || 50;
+            const confirmMsg = `Anda telah menjawab ${answeredCount} dari ${totalQ} soal. Apakah Anda yakin ingin mengakhiri dan mengirim hasil ujian?`;
+
+            if (confirm(confirmMsg)) {
+                finishExam(false);
+            }
+        }
+
+        function finishExam(isTimeOut = false) {
+            if (currentExamState.timerInterval) {
+                clearInterval(currentExamState.timerInterval);
+            }
+
+            const totalQ = store.settings.totalQuestionsConfig || 50;
+            let correct = 0;
+            let wrong = 0;
+            let empty = 0;
+
+            // Score Calculation
+            for (let i = 1; i <= totalQ; i++) {
+                const userAns = currentExamState.answers[i];
+                const qObj = store.questions[i - 1];
+
+                if (!userAns) {
+                    empty++;
+                } else if (qObj && userAns === qObj.correctAnswer) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            }
+
+            const scoreCorrectRule = store.settings.scoreCorrect || 2;
+            const scoreWrongRule = store.settings.scoreWrong || -1;
+            const scoreEmptyRule = store.settings.scoreEmpty || 0;
+
+            const finalScore = (correct * scoreCorrectRule) + (wrong * scoreWrongRule) + (empty * scoreEmptyRule);
+
+            const resultEntry = {
+                id: 'RES_' + Date.now(),
+                participantId: currentAuth.data.id,
+                name: currentAuth.data.name,
+                username: currentAuth.data.username,
+                jemaat: currentAuth.data.jemaat,
+                correct,
+                wrong,
+                empty,
+                finalScore,
+                startTime: currentExamState.startTime,
+                endTime: new Date().toISOString(),
+                status: isTimeOut ? 'Berakhir karena Waktu Habis' : 'Selesai'
+            };
+
+            // Save result to store
+            store.results = store.results.filter(r => r.participantId !== currentAuth.data.id);
+            store.results.push(resultEntry);
+            saveData();
+
+            currentExamState.active = false;
+            navigateTo('participant-result', { resultObj: resultEntry });
+        }
+
+        function renderParticipantResultPage(resultObj) {
+            const container = document.getElementById('main-content');
+            
+            if (!resultObj) {
+                resultObj = store.results.find(r => r.participantId === currentAuth.data.id);
+            }
+
+            if (!store.settings.showResultsToParticipants) {
+                container.innerHTML = `
+                    <div class="min-h-[calc(100vh-130px)] bg-slate-50 p-6 flex items-center justify-center">
+                        <div class="max-w-md w-full bg-white rounded-2xl shadow-md border border-slate-200 p-8 text-center">
+                            <div class="w-16 h-16 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2">Ujian Berhasil Diselesaikan</h3>
+                            <p class="text-xs text-slate-600 mb-6">${store.settings.closingMsg}</p>
+                            <p class="text-xs text-amber-600 font-semibold bg-amber-50 p-3 rounded-lg border border-amber-200">
+                                Detail hasil dan nilai ujian akan diumumkan secara resmi oleh Panitia.
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="min-h-[calc(100vh-130px)] bg-purple-gradient py-10 px-4 flex justify-center items-center">
+                    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-purple-100">
+                        <!-- Result Header -->
+                        <div class="bg-brand-900 p-6 text-center text-white relative border-b-2 border-gold-400">
+                            <h2 class="text-xl font-bold text-gold-300 uppercase tracking-wider">HASIL UJIAN SELESAI</h2>
+                            <p class="text-xs text-purple-200 mt-1">${store.settings.title} - ${store.settings.subtitle}</p>
+                        </div>
+
+                        <div class="p-6 sm:p-8 space-y-6">
+                            <!-- Participant Info Card -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div>
+                                    <span class="text-slate-400 block">Nama Lengkap Peserta:</span>
+                                    <strong class="text-slate-800 text-sm">${resultObj ? resultObj.name : '-'}</strong>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block">Asal Jemaat:</span>
+                                    <strong class="text-slate-800 text-sm">${resultObj ? resultObj.jemaat : '-'}</strong>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block">Username:</span>
+                                    <span class="text-slate-700 font-medium">${resultObj ? resultObj.username : '-'}</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block">Status Penyelesaian:</span>
+                                    <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block mt-0.5">${resultObj ? resultObj.status : '-'}</span>
+                                </div>
+                            </div>
+
+                            <!-- Score Banner -->
+                            <div class="bg-gold-gradient rounded-xl p-6 text-center text-brand-950 shadow-lg">
+                                <span class="text-xs font-extrabold tracking-widest uppercase opacity-80">NILAI AKHIR PESERTA</span>
+                                <div class="text-5xl font-extrabold my-2">${resultObj ? resultObj.finalScore : 0}</div>
+                                <span class="text-xs font-semibold bg-brand-950/10 px-3 py-1 rounded-full">Nilai Maksimum: 100</span>
+                            </div>
+
+                            <!-- Stats Grid -->
+                            <div class="grid grid-cols-3 gap-3 text-center">
+                                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3">
+                                    <div class="text-xs text-emerald-600 font-bold">JAWABAN BENAR</div>
+                                    <div class="text-2xl font-extrabold text-emerald-700 mt-1">${resultObj ? resultObj.correct : 0}</div>
+                                    <div class="text-[10px] text-emerald-600 mt-0.5">(+2 Poin / Soal)</div>
+                                </div>
+                                <div class="bg-red-50 border border-red-200 rounded-xl p-3">
+                                    <div class="text-xs text-red-600 font-bold">JAWABAN SALAH</div>
+                                    <div class="text-2xl font-extrabold text-red-700 mt-1">${resultObj ? resultObj.wrong : 0}</div>
+                                    <div class="text-[10px] text-red-600 mt-0.5">(-1 Poin / Soal)</div>
+                                </div>
+                                <div class="bg-slate-100 border border-slate-200 rounded-xl p-3">
+                                    <div class="text-xs text-slate-600 font-bold">TIDAK DIJAWAB</div>
+                                    <div class="text-2xl font-extrabold text-slate-700 mt-1">${resultObj ? resultObj.empty : 0}</div>
+                                    <div class="text-[10px] text-slate-500 mt-0.5">(0 Poin)</div>
+                                </div>
+                            </div>
+
+                            <!-- Time Timestamp -->
+                            <div class="text-center text-xs text-slate-400 space-y-1">
+                                <p>Waktu Mulai: ${resultObj ? new Date(resultObj.startTime).toLocaleString('id-ID') : '-'}</p>
+                                <p>Waktu Selesai: ${resultObj ? new Date(resultObj.endTime).toLocaleString('id-ID') : '-'}</p>
+                            </div>
+
+                            <!-- Closing Message -->
+                            <div class="bg-brand-50 border border-brand-200 rounded-xl p-4 text-center text-xs text-brand-900 leading-relaxed font-medium">
+                                "${store.settings.closingMsg}"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminLogin(errorMsg = '') {
+            const container = document.getElementById('main-content');
+            container.innerHTML = `
+                <div class="min-h-[calc(100vh-130px)] bg-slate-900 py-12 px-4 flex items-center justify-center">
+                    <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
+                        <div class="bg-brand-950 p-6 text-center text-white border-b-2 border-gold-400">
+                            <i class="fa-solid fa-user-shield text-3xl text-gold-400 mb-2"></i>
+                            <h2 class="text-lg font-bold text-gold-300 uppercase tracking-wide">Portal Admin & Panitia</h2>
+                            <p class="text-xs text-purple-200 mt-1">${store.settings.title}</p>
+                        </div>
+
+                        <div class="p-6 sm:p-8">
+                            ${errorMsg ? `
+                                <div class="mb-4 bg-red-50 border-l-4 border-red-500 p-3 rounded text-xs text-red-700">
+                                    ${errorMsg}
+                                </div>
+                            ` : ''}
+
+                            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Username Admin</label>
+                                    <input type="text" id="admin-user" required placeholder="Masukkan username admin" class="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Password Admin</label>
+                                    <input type="password" id="admin-pass" required placeholder="Masukkan password admin" class="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+
+                                <button type="submit" class="w-full bg-brand-800 hover:bg-brand-900 text-white font-bold py-3 rounded-lg text-sm shadow transition">
+                                    MASUK DASHBOARD
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('admin-user').value.trim();
+            const p = document.getElementById('admin-pass').value.trim();
+
+            if (u === store.admin.username && p === store.admin.passwordHash) {
+                currentAuth = { type: 'admin', data: store.admin };
+                navigateTo('admin-dashboard');
+            } else {
+                renderAdminLogin("Kredensial Admin Salah!");
+            }
+        }
+
+        function renderAdminDashboard(tab = 'overview') {
+            const container = document.getElementById('main-content');
+
+            container.innerHTML = `
+                <div class="bg-slate-100 min-h-[calc(100vh-130px)] flex flex-col md:flex-row">
+                    <!-- Admin Sidebar -->
+                    <aside class="w-full md:w-64 bg-brand-950 text-purple-100 flex-shrink-0 border-r border-brand-900 no-print">
+                        <div class="p-4 border-b border-brand-900 flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-gold-500 text-brand-950 font-bold flex items-center justify-center text-xs">
+                                AD
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-white uppercase">${store.admin.name}</h3>
+                                <p class="text-[10px] text-gold-400">Administrator Utama</p>
+                            </div>
+                        </div>
+
+                        <nav class="p-3 space-y-1 text-xs">
+                            <button onclick="navigateTo('admin-dashboard')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition ${tab === 'overview' ? 'bg-brand-800 text-gold-300 font-bold' : 'hover:bg-brand-900 text-purple-200'}">
+                                <i class="fa-solid fa-chart-pie w-4"></i>
+                                <span>Ringkasan Dashboard</span>
+                            </button>
+                            <button onclick="navigateTo('admin-participants')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition ${tab === 'participants' ? 'bg-brand-800 text-gold-300 font-bold' : 'hover:bg-brand-900 text-purple-200'}">
+                                <i class="fa-solid fa-users w-4"></i>
+                                <span>Manajemen Peserta</span>
+                            </button>
+                            <button onclick="navigateTo('admin-jemaat')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition ${tab === 'jemaat' ? 'bg-brand-800 text-gold-300 font-bold' : 'hover:bg-brand-900 text-purple-200'}">
+                                <i class="fa-solid fa-church w-4"></i>
+                                <span>Manajemen Jemaat</span>
+                            </button>
+                            <button onclick="navigateTo('admin-questions')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition ${tab === 'questions' ? 'bg-brand-800 text-gold-300 font-bold' : 'hover:bg-brand-900 text-purple-200'}">
+                                <i class="fa-solid fa-file-pen w-4"></i>
+                                <span>Manajemen Soal (50)</span>
+                            </button>
+                            <button onclick="navigateTo('admin-results')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition ${tab === 'results' ? 'bg-brand-800 text-gold-300 font-bold' : 'hover:bg-brand-900 text-purple-200'}">
+                                <i class="fa-solid fa-square-poll-vertical w-4"></i>
+                                <span>Hasil & Rekapitulasi</span>
+                            </button>
+                            <button onclick="navigateTo('admin-settings')" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition ${tab === 'settings' ? 'bg-brand-800 text-gold-300 font-bold' : 'hover:bg-brand-900 text-purple-200'}">
+                                <i class="fa-solid fa-gears w-4"></i>
+                                <span>Pengaturan Ujian & Logo</span>
+                            </button>
+                        </nav>
+                    </aside>
+
+                    <!-- Main Admin Content Area -->
+                    <main class="flex-grow p-4 sm:p-6 lg:p-8 overflow-x-hidden">
+                        <div id="admin-tab-content">
+                            <!-- Dynamic Tab View Injected Here -->
+                        </div>
+                    </main>
+                </div>
+            `;
+
+            renderAdminTabContent(tab);
+        }
+
+        function renderAdminTabContent(tab) {
+            const content = document.getElementById('admin-tab-content');
+
+            if (tab === 'overview') {
+                const totalParticipants = store.participants.length;
+                const totalJemaat = store.jemaatList.length;
+                const completedResults = store.results.length;
+                const notTaken = totalParticipants - completedResults;
+
+                const scores = store.results.map(r => r.finalScore);
+                const avgScore = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1) : 0;
+                const maxScore = scores.length ? Math.max(...scores) : 0;
+                const minScore = scores.length ? Math.min(...scores) : 0;
+
+                content.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-bold text-slate-800">Ringkasan Statistik Ujian</h2>
+                            <span class="text-xs bg-brand-100 text-brand-800 px-3 py-1 rounded-full font-bold">
+                                Status Ujian: ${store.settings.examStatus.toUpperCase()}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="text-xs text-slate-500 font-semibold">Total Peserta Terdaftar</div>
+                                <div class="text-3xl font-extrabold text-brand-900 mt-2">${totalParticipants}</div>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="text-xs text-slate-500 font-semibold">Total Jemaat</div>
+                                <div class="text-3xl font-extrabold text-slate-800 mt-2">${totalJemaat}</div>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="text-xs text-emerald-600 font-semibold">Telah Selesai Ujian</div>
+                                <div class="text-3xl font-extrabold text-emerald-600 mt-2">${completedResults}</div>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="text-xs text-amber-600 font-semibold">Belum Mengikuti Ujian</div>
+                                <div class="text-3xl font-extrabold text-amber-600 mt-2">${notTaken < 0 ? 0 : notTaken}</div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-brand-900 text-white p-5 rounded-xl shadow-sm">
+                                <div class="text-xs text-purple-200">Rata-Rata Nilai</div>
+                                <div class="text-3xl font-extrabold text-gold-300 mt-2">${avgScore}</div>
+                            </div>
+                            <div class="bg-emerald-700 text-white p-5 rounded-xl shadow-sm">
+                                <div class="text-xs text-emerald-100">Nilai Tertinggi</div>
+                                <div class="text-3xl font-extrabold mt-2">${maxScore}</div>
+                            </div>
+                            <div class="bg-slate-800 text-white p-5 rounded-xl shadow-sm">
+                                <div class="text-xs text-slate-300">Nilai Terendah</div>
+                                <div class="text-3xl font-extrabold mt-2">${minScore}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (tab === 'participants') {
+                renderAdminParticipants(content);
+            } else if (tab === 'jemaat') {
+                renderAdminJemaat(content);
+            } else if (tab === 'questions') {
+                renderAdminQuestions(content);
+            } else if (tab === 'results') {
+                renderAdminResults(content);
+            } else if (tab === 'settings') {
+                renderAdminSettings(content);
+            }
+        }
+
+        function renderAdminParticipants(container) {
+            const rows = store.participants.map((p, idx) => `
+                <tr class="border-b border-slate-100 hover:bg-slate-50 text-xs">
+                    <td class="py-3 px-4 font-semibold">${idx + 1}</td>
+                    <td class="py-3 px-4 font-bold text-slate-800">${p.name}</td>
+                    <td class="py-3 px-4 text-slate-600">${p.username}</td>
+                    <td class="py-3 px-4 text-slate-600">${p.password}</td>
+                    <td class="py-3 px-4">${p.jemaat}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${p.active ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+                            ${p.active ? 'Aktif' : 'Nonaktif'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-right space-x-2">
+                        <button onclick="toggleParticipantStatus('${p.id}')" class="text-slate-500 hover:text-brand-700">
+                            <i class="fa-solid fa-power-off"></i>
+                        </button>
+                        <button onclick="deleteParticipant('${p.id}')" class="text-red-500 hover:text-red-700">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <h2 class="text-xl font-bold text-slate-800">Manajemen Peserta Ujian</h2>
+                        <button onclick="openAddParticipantModal()" class="bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs px-4 py-2.5 rounded-lg shadow flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Tambah Peserta Baru</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase">
+                                        <th class="py-3 px-4">No</th>
+                                        <th class="py-3 px-4">Nama Lengkap</th>
+                                        <th class="py-3 px-4">Username</th>
+                                        <th class="py-3 px-4">Password</th>
+                                        <th class="py-3 px-4">Jemaat</th>
+                                        <th class="py-3 px-4">Status</th>
+                                        <th class="py-3 px-4 text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rows.length ? rows : '<tr><td colspan="7" class="text-center py-6 text-xs text-slate-400">Belum ada peserta terdaftar</td></tr>'}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openAddParticipantModal() {
+            const jemaatOptions = store.jemaatList.map(j => `<option value="${j.name}">${j.name}</option>`).join('');
+            const name = prompt("Masukkan Nama Lengkap Peserta:");
+            if (!name) return;
+            const username = prompt("Masukkan Username:");
+            if (!username) return;
+            const password = prompt("Masukkan Password:");
+            if (!password) return;
+            const jemaat = prompt("Masukkan/Pilih Jemaat (Contoh: GMIM Baitani Lapangan):");
+            if (!jemaat) return;
+
+            const newP = {
+                id: 'P_' + Date.now(),
+                name,
+                username,
+                password,
+                jemaat,
+                active: true
+            };
+
+            store.participants.push(newP);
+            saveData();
+            renderAdminDashboard('participants');
+        }
+
+        function toggleParticipantStatus(id) {
+            const p = store.participants.find(x => x.id === id);
+            if (p) {
+                p.active = !p.active;
+                saveData();
+                renderAdminDashboard('participants');
+            }
+        }
+
+        function deleteParticipant(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus peserta ini?")) {
+                store.participants = store.participants.filter(x => x.id !== id);
+                saveData();
+                renderAdminDashboard('participants');
+            }
+        }
+
+        function renderAdminJemaat(container) {
+            const rows = store.jemaatList.map((j, idx) => {
+                const count = store.participants.filter(p => p.jemaat === j.name).length;
+                return `
+                    <tr class="border-b border-slate-100 hover:bg-slate-50 text-xs">
+                        <td class="py-3 px-4 font-semibold">${idx + 1}</td>
+                        <td class="py-3 px-4 font-bold text-slate-800">${j.name}</td>
+                        <td class="py-3 px-4 font-bold text-brand-700">${count} Peserta</td>
+                        <td class="py-3 px-4 text-right">
+                            <button onclick="deleteJemaat('${j.id}')" class="text-red-500 hover:text-red-700">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-slate-800">Manajemen Jemaat</h2>
+                        <button onclick="addJemaatPrompt()" class="bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs px-4 py-2.5 rounded-lg shadow flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Tambah Jemaat</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase">
+                                    <th class="py-3 px-4">No</th>
+                                    <th class="py-3 px-4">Nama Jemaat</th>
+                                    <th class="py-3 px-4">Jumlah Peserta Terdaftar</th>
+                                    <th class="py-3 px-4 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function addJemaatPrompt() {
+            const name = prompt("Masukkan Nama Jemaat GMIM Baru:");
+            if (name) {
+                store.jemaatList.push({ id: 'J_' + Date.now(), name });
+                saveData();
+                renderAdminDashboard('jemaat');
+            }
+        }
+
+        function deleteJemaat(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus Jemaat ini?")) {
+                store.jemaatList = store.jemaatList.filter(j => j.id !== id);
+                saveData();
+                renderAdminDashboard('jemaat');
+            }
+        }
+
+        function renderAdminQuestions(container) {
+            const qList = store.questions.map(q => `
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2 text-xs">
+                    <div class="flex items-center justify-between font-bold text-brand-800 pb-2 border-b border-slate-100">
+                        <span>Soal #${q.id} (${q.category})</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Kunci: ${q.correctAnswer}</span>
+                    </div>
+                    <p class="text-slate-800 font-medium text-sm leading-snug">${q.question}</p>
+                    <div class="grid grid-cols-2 gap-2 text-slate-600 pt-2">
+                        <div><strong>A:</strong> ${q.options.A}</div>
+                        <div><strong>B:</strong> ${q.options.B}</div>
+                        <div><strong>C:</strong> ${q.options.C}</div>
+                        <div><strong>D:</strong> ${q.options.D}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">Manajemen Bank Soal (${store.questions.length} Soal)</h2>
+                            <p class="text-xs text-slate-500">Standar ujian dikonfigurasi untuk tepat 50 soal.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${qList}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminResults(container) {
+            // Sort by final score descending
+            const sortedResults = [...store.results].sort((a, b) => b.finalScore - a.finalScore);
+
+            const rows = sortedResults.map((r, idx) => `
+                <tr class="border-b border-slate-100 hover:bg-slate-50 text-xs">
+                    <td class="py-3 px-4 font-bold text-center">
+                        ${idx === 0 ? '🥇 1' : idx === 1 ? '🥈 2' : idx === 2 ? '🥉 3' : idx + 1}
+                    </td>
+                    <td class="py-3 px-4 font-bold text-slate-800">${r.name}</td>
+                    <td class="py-3 px-4">${r.jemaat}</td>
+                    <td class="py-3 px-4 text-center text-emerald-600 font-bold">${r.correct}</td>
+                    <td class="py-3 px-4 text-center text-red-600 font-bold">${r.wrong}</td>
+                    <td class="py-3 px-4 text-center text-slate-500">${r.empty}</td>
+                    <td class="py-3 px-4 text-center font-extrabold text-sm text-brand-900 bg-brand-50">${r.finalScore}</td>
+                    <td class="py-3 px-4 text-center">${r.status}</td>
+                </tr>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 no-print">
+                        <h2 class="text-xl font-bold text-slate-800">Rekapitulasi Hasil & Peringkat Ujian</h2>
+                        <div class="flex space-x-2">
+                            <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3.5 py-2.5 rounded-lg shadow flex items-center space-x-1">
+                                <i class="fa-solid fa-print"></i>
+                                <span>Cetak Hasil</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-brand-900 text-white text-xs font-bold uppercase">
+                                        <th class="py-3 px-4 text-center">Peringkat</th>
+                                        <th class="py-3 px-4">Nama Peserta</th>
+                                        <th class="py-3 px-4">Asal Jemaat</th>
+                                        <th class="py-3 px-4 text-center">Benar (+2)</th>
+                                        <th class="py-3 px-4 text-center">Salah (-1)</th>
+                                        <th class="py-3 px-4 text-center">Kosong (0)</th>
+                                        <th class="py-3 px-4 text-center">Nilai Akhir</th>
+                                        <th class="py-3 px-4 text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rows.length ? rows : '<tr><td colspan="8" class="text-center py-6 text-xs text-slate-400">Belum ada data hasil ujian yang dikirim</td></tr>'}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminSettings(container) {
+            container.innerHTML = `
+                <div class="space-y-6 max-w-3xl">
+                    <h2 class="text-xl font-bold text-slate-800">Pengaturan Ujian & Logo Kegiatan</h2>
+
+                    <form onsubmit="handleSaveSettings(event)" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-5 text-xs">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Judul Utama Kegiatan</label>
+                            <input type="text" id="setting-title" value="${store.settings.title}" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Sub-Judul Kegiatan (Wilayah)</label>
+                            <input type="text" id="setting-subtitle" value="${store.settings.subtitle}" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">URL Logo Kegiatan (Atau Pilih Dari Perangkat)</label>
+                            <div class="flex items-center space-x-3">
+                                <input type="text" id="setting-logourl" value="${store.settings.logoUrl}" required class="flex-grow p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                                <input type="file" id="setting-logofile" accept="image/*" onchange="handleLogoUpload(event)" class="hidden">
+                                <button type="button" onclick="document.getElementById('setting-logofile').click()" class="bg-slate-700 text-white font-bold px-3 py-2.5 rounded-lg">
+                                    Unggah File Logo
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Durasi Ujian (Menit)</label>
+                                <input type="number" id="setting-duration" value="${store.settings.durationMinutes}" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Status Ujian</label>
+                                <select id="setting-status" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <option value="active" ${store.settings.examStatus === 'active' ? 'selected' : ''}>Aktif (Bisa Diikuti Peserta)</option>
+                                    <option value="draft" ${store.settings.examStatus === 'draft' ? 'selected' : ''}>Draf (Belum Dimulai)</option>
+                                    <option value="closed" ${store.settings.examStatus === 'closed' ? 'selected' : ''}>Ditutup Resmi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4 border-t border-b border-slate-100 py-3">
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Skor Benar</label>
+                                <input type="number" id="setting-score-correct" value="${store.settings.scoreCorrect}" readonly class="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Skor Salah</label>
+                                <input type="number" id="setting-score-wrong" value="${store.settings.scoreWrong}" readonly class="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Skor Kosong</label>
+                                <input type="number" id="setting-score-empty" value="${store.settings.scoreEmpty}" readonly class="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-lg">
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="setting-showresults" ${store.settings.showResultsToParticipants ? 'checked' : ''} class="rounded text-brand-600">
+                                <span class="font-bold text-slate-700">Tampilkan Nilai Langsung Kepada Peserta Setelah Ujian</span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Pesan Penutup/Ucapan Terima Kasih</label>
+                            <textarea id="setting-closingmsg" rows="2" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg">${store.settings.closingMsg}</textarea>
+                        </div>
+
+                        <button type="submit" class="bg-brand-800 hover:bg-brand-900 text-white font-bold py-3 px-6 rounded-lg shadow text-xs">
+                            SIMPAN SEMUA PENGATURAN
+                        </button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function handleLogoUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    document.getElementById('setting-logourl').value = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleSaveSettings(e) {
+            e.preventDefault();
+            store.settings.title = document.getElementById('setting-title').value;
+            store.settings.subtitle = document.getElementById('setting-subtitle').value;
+            store.settings.logoUrl = document.getElementById('setting-logourl').value;
+            store.settings.durationMinutes = parseInt(document.getElementById('setting-duration').value) || 60;
+            store.settings.examStatus = document.getElementById('setting-status').value;
+            store.settings.showResultsToParticipants = document.getElementById('setting-showresults').checked;
+            store.settings.closingMsg = document.getElementById('setting-closingmsg').value;
+
+            saveData();
+            alert("Pengaturan berhasil disimpan secara permanen!");
+            renderAdminDashboard('settings');
+        }
+
+        window.onload = function() {
+            saveData();
+            navigateTo('participant-login');
+        };
+    </script>
+</body>
+</html>
